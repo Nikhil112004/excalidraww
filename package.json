@@ -1,0 +1,22 @@
+{
+  "name": "Excalidraww",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "postinstall": "prisma skills sync || exit 0"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6",
+    "turbo": "^2.11.8",
+    "typescript": "7.0.2",
+    "prisma": "8.0.0-rc.23"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24"
+  }
+}
