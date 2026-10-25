@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -b",
-    "start": "node ./dist/index.js",
+    "start": "pnpm --filter @repo/db build && node --env-file=../../packages/db/.env ./dist/index.js",
     "dev": "pnpm run build && pnpm run start"
   },
   "keywords": [],
@@ -13,14 +13,17 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@repo/db": "workspace:*",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "cors": "^2.8.6",
     "express": "^5.3.0",
     "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
     "@repo/backend-common": "workspace:*",
-    "@repo/common": "workspace:*"
+    "@repo/common": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
   }
 }
