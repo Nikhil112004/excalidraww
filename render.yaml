@@ -25,7 +25,7 @@ services:
     name: excalidraww-ws
     runtime: node
     plan: free
-    buildCommand: corepack enable && corepack prepare pnpm@11.25.0 --activate && pnpm install --frozen-lockfile && pnpm --filter ws-backend build
+    buildCommand: corepack pnpm install --frozen-lockfile && corepack pnpm --filter ws-backend build
     startCommand: pnpm --filter ws-backend start
     healthCheckPath: /health
     envVars:
