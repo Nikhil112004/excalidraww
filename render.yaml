@@ -9,7 +9,7 @@ services:
     name: excalidraww-http
     runtime: node
     plan: free
-    buildCommand: corepack enable && corepack prepare pnpm@11.25.0 --activate && pnpm install --frozen-lockfile && pnpm --filter http-backend build
+    buildCommand: corepack pnpm install --frozen-lockfile && corepack pnpm --filter http-backend build
     startCommand: pnpm --filter http-backend start
     healthCheckPath: /health
     envVars:
