@@ -1,9 +1,20 @@
+import { createServer } from "node:http";
 import { WebSocket, WebSocketServer } from 'ws';
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from '@repo/backend-common/config';
 import { prismaClient } from "@repo/db/client";
 
-const wss = new WebSocketServer({ port: 8080 });
+const server = createServer((req, res) => {
+  if (req.url === "/health") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("ok");
+    return;
+  }
+
+  res.writeHead(404);
+  res.end("Not found");
+});
+const wss = new WebSocketServer({ server });
 
 interface User {
   ws: WebSocket,
@@ -112,3 +123,6 @@ wss.on('connection', function connection(ws, request) {
   });
 
 });
+
+const port = Number(process.env.PORT) || 8080;
+server.listen(port, "0.0.0.0");

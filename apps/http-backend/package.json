@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b",
-    "start": "pnpm --filter @repo/db build && node --env-file=../../packages/db/.env ./dist/index.js",
+    "build": "pnpm --filter @repo/db build && tsc -b",
+    "start": "node --env-file-if-exists=../../packages/db/.env ./dist/index.js",
     "dev": "pnpm run build && pnpm run start"
   },
   "keywords": [],
@@ -14,6 +14,8 @@
   "type": "module",
   "dependencies": {
     "@repo/db": "workspace:*",
+    "@repo/backend-common": "workspace:*",
+    "@repo/common": "workspace:*",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
@@ -22,8 +24,6 @@
     "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
-    "@repo/backend-common": "workspace:*",
-    "@repo/common": "workspace:*",
     "@repo/typescript-config": "workspace:*"
   }
 }

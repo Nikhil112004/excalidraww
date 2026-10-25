@@ -43,7 +43,7 @@ export function RoomCanvas({roomId}: {roomId: string}) {
             ws.onerror = (event) => {
                 if (active) {
                     console.error("WebSocket connection failed", event);
-                    setConnectionError("Could not connect to the WebSocket server at localhost:8080. Check the WS backend terminal.");
+                    setConnectionError("Could not connect to the realtime server. Please try again.");
                 }
             };
 

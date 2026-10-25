@@ -8,7 +8,11 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors({ origin: process.env.FRONTEND_ORIGIN || true }));
+
+app.get("/health", (_req, res) => {
+    res.status(200).send("ok");
+});
 
 app.post("/signup", async (req, res) => {
     const parsedData = createUserSchema.safeParse(req.body);
@@ -138,5 +142,6 @@ app.get("/room/:slug", async (req, res) => {
 })
 
 
-app.listen(3001);
+const port = Number(process.env.PORT) || 3001;
+app.listen(port, "0.0.0.0");
 

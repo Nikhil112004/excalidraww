@@ -1,0 +1,36 @@
+envVarGroups:
+  - name: excalidraww-backend-secrets
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+
+services:
+  - type: web
+    name: excalidraww-http
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && corepack prepare pnpm@11.25.0 --activate && pnpm install --frozen-lockfile && pnpm --filter http-backend build
+    startCommand: pnpm --filter http-backend start
+    healthCheckPath: /health
+    envVars:
+      - fromGroup: excalidraww-backend-secrets
+      - key: NODE_VERSION
+        value: "24"
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+
+  - type: web
+    name: excalidraww-ws
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && corepack prepare pnpm@11.25.0 --activate && pnpm install --frozen-lockfile && pnpm --filter ws-backend build
+    startCommand: pnpm --filter ws-backend start
+    healthCheckPath: /health
+    envVars:
+      - fromGroup: excalidraww-backend-secrets
+      - key: NODE_VERSION
+        value: "24"
+      - key: DATABASE_URL
+        sync: false
